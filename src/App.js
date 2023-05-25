@@ -5,8 +5,8 @@ const TICKER = "SPUS";
 const API_BASE_URL = "https://query1.finance.yahoo.com/v7/finance/download";
 
 const App = () => {
-  const [fromDate, setFromDate] = useState('2022-01-01');
-  const [toDate, setToDate] = useState('2022-06-30');
+  const [fromDate, setFromDate] = useState("2022-01-01");
+  const [toDate, setToDate] = useState("2022-06-30");
   const [interval, setInterval] = useState("1d");
   const [chartData, setChartData] = useState([]);
 
@@ -115,12 +115,16 @@ const App = () => {
         </div>
       </div>
       <div>
-        <ReactApexChart
-          options={options}
-          series={[{ data: chartData }]}
-          type="candlestick"
-          height={350}
-        />
+        {chartData.length > 0 ? (
+          <ReactApexChart
+            options={options}
+            series={[{ data: chartData }]}
+            type="candlestick"
+            height={350}
+          />
+        ) : (
+          <p>Loading chart data...</p>
+        )}
       </div>
     </div>
   );
