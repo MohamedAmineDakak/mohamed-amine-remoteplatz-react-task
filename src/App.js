@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 
-const TICKER = "SPUS";
 const API_BASE_URL = "https://query1.finance.yahoo.com/v7/finance/download";
+const TICKER = "SPUS";
+const DEFAULT_DATE_FROM = "2022-01-01";
+const DEFAULT_DATE_TO = "2022-06-30";
+const DEFAULT_INTERVAL = "1d";
 
 const App = () => {
-  const [fromDate, setFromDate] = useState("2022-01-01");
-  const [toDate, setToDate] = useState("2022-06-30");
-  const [interval, setInterval] = useState("1d");
+  const [fromDate, setFromDate] = useState(DEFAULT_DATE_FROM);
+  const [toDate, setToDate] = useState(DEFAULT_DATE_TO);
+  const [interval, setInterval] = useState(DEFAULT_INTERVAL);
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
