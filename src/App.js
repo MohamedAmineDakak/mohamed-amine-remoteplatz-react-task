@@ -5,8 +5,8 @@ const TICKER = "SPUS";
 const API_BASE_URL = "https://query1.finance.yahoo.com/v7/finance/download";
 
 const App = () => {
-  const [fromDate, setFromDate] = useState(1633381200);
-  const [toDate, setToDate] = useState(1664917199);
+  const [fromDate, setFromDate] = useState('2022-01-01');
+  const [toDate, setToDate] = useState('2022-06-30');
   const [interval, setInterval] = useState("1d");
   const [chartData, setChartData] = useState([]);
 
@@ -14,9 +14,16 @@ const App = () => {
     fetchData();
   }, [fromDate, toDate, interval]);
 
+  const getTimeStamp = (date) => {
+    return Math.floor(new Date(date).getTime() / 1000);
+  };
+
   const fetchData = async () => {
     try {
-      const url = `${API_BASE_URL}/${TICKER}?period1=${fromDate}&period2=${toDate}&interval=${interval}&events=history`;
+      const fromTimestamp = getTimeStamp(fromDate);
+      const toTimestamp = getTimeStamp(toDate);
+
+      const url = `${API_BASE_URL}/${TICKER}?period1=${fromTimestamp}&period2=${toTimestamp}&interval=${interval}&events=history`;
       const response = await fetch(url);
       const data = await response.text();
 
@@ -80,7 +87,7 @@ const App = () => {
           <label htmlFor="fromDate">From: </label>
           <input
             id="fromDate"
-            type="text"
+            type="date"
             value={fromDate}
             onChange={handleFromDateChange}
           />
@@ -89,7 +96,7 @@ const App = () => {
           <label htmlFor="toDate">To: </label>
           <input
             id="toDate"
-            type="text"
+            type="date"
             value={toDate}
             onChange={handleToDateChange}
           />
