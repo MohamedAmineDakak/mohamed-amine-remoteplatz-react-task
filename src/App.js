@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
-
-const API_BASE_URL = "https://query1.finance.yahoo.com/v7/finance/download";
-const TICKER = "SPUS";
-const DEFAULT_DATE_FROM = "2022-01-01";
-const DEFAULT_DATE_TO = "2022-06-30";
-const DEFAULT_INTERVAL = "1d";
+import * as constants from "./constants";
 
 const App = () => {
-  const [fromDate, setFromDate] = useState(DEFAULT_DATE_FROM);
-  const [toDate, setToDate] = useState(DEFAULT_DATE_TO);
-  const [interval, setInterval] = useState(DEFAULT_INTERVAL);
+  const [fromDate, setFromDate] = useState(constants.DEFAULT_DATE_FROM);
+  const [toDate, setToDate] = useState(constants.DEFAULT_DATE_TO);
+  const [interval, setInterval] = useState(constants.DEFAULT_INTERVAL);
   const [chartData, setChartData] = useState([]);
 
   useEffect(() => {
@@ -26,7 +21,7 @@ const App = () => {
       const fromTimestamp = getTimeStamp(fromDate);
       const toTimestamp = getTimeStamp(toDate);
 
-      const url = `${API_BASE_URL}/${TICKER}?period1=${fromTimestamp}&period2=${toTimestamp}&interval=${interval}&events=history`;
+      const url = `${constants.API_BASE_URL}/${constants.TICKER}?period1=${fromTimestamp}&period2=${toTimestamp}&interval=${interval}&events=history`;
       const response = await fetch(url);
       const data = await response.text();
 
