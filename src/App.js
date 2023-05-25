@@ -24,7 +24,54 @@ const App = () => {
     }
   };
 
-  return <div>Loading...</div>;
+  const handleFromDateChange = (event) => {
+    setFromDate(event.target.value);
+  };
+
+  const handleToDateChange = (event) => {
+    setToDate(event.target.value);
+  };
+
+  const handleIntervalChange = (event) => {
+    setInterval(event.target.value);
+  };
+
+  return (
+    <div>
+      <div className="filters">
+        <div>
+          <label htmlFor="fromDate">From: </label>
+          <input
+            id="fromDate"
+            type="text"
+            value={fromDate}
+            onChange={handleFromDateChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="toDate">To: </label>
+          <input
+            id="toDate"
+            type="text"
+            value={toDate}
+            onChange={handleToDateChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="interval">Interval: </label>
+          <select
+            id="interval"
+            value={interval}
+            onChange={handleIntervalChange}
+          >
+            <option value="1d">1 Day</option>
+            <option value="1wk">1 Week</option>
+            <option value="1mo">1 Month</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default App;
